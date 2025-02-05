@@ -179,7 +179,7 @@ export default function App() {
               whileHover={{ scale: 1.05 }}
               className="bg-[#fff5e9] text-[#2d1c3b] px-6 py-2 rounded-full hover:bg-[#ffe0c2] transition-colors shadow-md"
             >
-              Resources
+              <Link to="/res">Resources</Link>
             </motion.button>
             <Link to={"/add "}>
               <motion.button
