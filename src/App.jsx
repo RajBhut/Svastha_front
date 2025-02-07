@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Cloud, Star, Heart, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatbotUI from "./componants/ChatbotUI ";
+import Login_Auth from "./componants/Login";
 
 const ElegantCard = ({ imageSrc }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -197,11 +198,9 @@ export default function App() {
                 Chat
               </motion.button>
             </Link>
-            <motion.button
-              onClick={() => setShowLogin(true)}
-              className="bg-[#ffb4b4] text-[#1a1a4d] px-4 py-2 rounded-full shadow-md transition-colors hover:bg-[#f5a6a6]"
-            >
-              Login
+
+            <motion.button className="bg-[#ffb4b4] text-[#1a1a4d] px-4 py-2 rounded-full shadow-md transition-colors hover:bg-[#f5a6a6]">
+              <Login_Auth />
             </motion.button>
           </div>
         </div>
@@ -309,3 +308,4 @@ export default function App() {
     </div>
   );
 }
+export { ElegantCard };
