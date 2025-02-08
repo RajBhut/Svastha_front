@@ -190,6 +190,14 @@ export default function App() {
                 Join
               </motion.button>
             </Link>
+            <Link to={"/the "}>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-[#fff5e9] text-[#2d1c3b] px-6 py-2 rounded-full hover:bg-[#ffe0c2] transition-colors shadow-md"
+              >
+                Connect
+              </motion.button>
+            </Link>
             <Link to={"/chat"}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -293,17 +301,6 @@ export default function App() {
             <Heart className="text-[#ffb4b4] w-6 h-6" />
           </motion.div>
         </div>
-
-        <div
-          className="fixed hover:bg-[#ffffff] hover:shadow-lg duration-300 text-center justify-center flex items-center cursor-pointer bottom-6 right-3 rounded-full bg-[#e8e7e6] w-14 h-14"
-          onClick={() => {
-            set_open_chat((prv) => !prv);
-          }}
-        >
-          <Bot />
-        </div>
-        <ChatbotUI open_chat={open_chat} set_open_chat={set_open_chat} />
-        {showLogin && <Login onClose={() => setShowLogin(false)} />}
       </main>
     </div>
   );

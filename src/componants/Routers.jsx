@@ -7,6 +7,7 @@ import ChatbotUI from "./ChatbotUI ";
 import ChatMain from "./ChatMain";
 import Resorse from "./Resorse";
 import Therapy from "./Therapy";
+import QuestionnaireForm from "./QuestionnaireForm";
 
 export default function Routers() {
   return (
@@ -17,6 +18,10 @@ export default function Routers() {
         <Route path="/chat" element={<ChatMain />} />
         <Route path="/res" element={<Resorse />} />
         <Route path="/the" element={<Therapy />} />
+        <Route
+          path="/questionnaire/:therapyType"
+          element={<QuestionnaireForm />}
+        />
       </Routes>
     </BrowserRouter>
   );
