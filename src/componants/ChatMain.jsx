@@ -22,7 +22,33 @@ const ChatMain = () => {
     scrollToBottom();
   }, [messages]);
 
-  const cleanAPIResponse = (response) => {
+  // const cleanAPIResponse = (response) => {
+  //   try {
+  //     const parsed =
+  //       typeof response === "string" ? JSON.parse(response) : response;
+
+  //     const responseText = parsed.response;
+
+  //     const outputIndex = responseText.indexOf("Output:");
+
+  //     if (outputIndex === -1) {
+  //       throw new Error("Output section not found in response");
+  //     }
+
+  //     let cleanedText = responseText.substring(outputIndex + "Output:".length);
+
+  //     cleanedText = cleanedText
+  //       .replace(/\\n/g, "\n")
+  //       .replace(/\n{3,}/g, "\n\n")
+  //       .trim();
+
+  //     return cleanedText;
+  //   } catch (error) {
+  //     console.error("Error cleaning API response:", error);
+  //     return "I apologize, but I had trouble processing the response. Could you try rephrasing your message?";
+  //   }
+  // };
+  function cleanAPIResponse(response) {
     try {
       const parsed =
         typeof response === "string" ? JSON.parse(response) : response;
@@ -37,31 +63,28 @@ const ChatMain = () => {
 
       let cleanedText = responseText.substring(outputIndex + "Output:".length);
 
-      cleanedText = cleanedText
-        .replace(/\\n/g, "\n")
-        .replace(/\n{3,}/g, "\n\n")
-        .trim();
+      cleanedText = cleanedText.replace(/\\n/g, "\n");
+
+      cleanedText = cleanedText.replace(/\n{3,}/g, "\n\n");
+
+      cleanedText = cleanedText.trim();
 
       return cleanedText;
     } catch (error) {
       console.error("Error cleaning API response:", error);
-      return "I apologize, but I had trouble processing the response. Could you try rephrasing your message?";
+      return null;
     }
-  };
-
+  }
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
-    const cleanedResponse = cleanAPIResponse(response.data);
-    setMessages((prev) => [
-      ...prev,
-      { type: "user", content: cleanedResponse },
-    ]);
+
+    setMessages((prev) => [...prev, { type: "user", content: inputMessage }]);
     setInputMessage("");
     setIsLoading(true);
 
     try {
       const response = await axios.post(
-        "https://7bac-35-243-204-56.ngrok-free.app/diagnose",
+        "https://1da1-35-243-204-56.ngrok-free.app/diagnose",
         {
           patient_narrative: inputMessage,
         },
@@ -71,12 +94,12 @@ const ChatMain = () => {
           },
         }
       );
-
+      const cleanedResponse = cleanAPIResponse(response.data);
       setMessages((prev) => [
         ...prev,
         {
           type: "bot",
-          content: response.data,
+          content: cleanedResponse,
         },
       ]);
     } catch (error) {
@@ -137,7 +160,12 @@ const ChatMain = () => {
                           : "bg-[#89e0e0] text-white"
                       }`}
                     >
-                      <p className="text-sm md:text-base">{message.content}</p>
+                      <p
+                        style={{ whiteSpace: "pre-wrap" }}
+                        className="text-sm md:text-base"
+                      >
+                        {message.content}
+                      </p>
                     </div>
                     {message.type === "user" ? (
                       <User className="w-6 h-6 text-[#ffb4b4]" />
