@@ -190,14 +190,7 @@ export default function App() {
                 Join
               </motion.button>
             </Link>
-            <Link to={"/the "}>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-[#fff5e9] text-[#2d1c3b] px-6 py-2 rounded-full hover:bg-[#ffe0c2] transition-colors shadow-md"
-              >
-                Connect
-              </motion.button>
-            </Link>
+
             <Link to={"/chat"}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -235,13 +228,15 @@ export default function App() {
                 and grow with personalized support and compassionate AI
                 guidance.
               </motion.p>
-              <motion.button
-                className="bg-gradient-to-r from-[#66c7c7] to-[#89e0e0] text-white text-xl px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Begin Your Journey
-              </motion.button>
+              <Link to={"/the "}>
+                <motion.button
+                  className="bg-gradient-to-r from-[#66c7c7] to-[#89e0e0] text-white text-xl px-12 py-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Begin Your Journey
+                </motion.button>
+              </Link>
             </div>
 
             <div className="w-1/2 flex justify-center items-center">
@@ -249,13 +244,13 @@ export default function App() {
             </div>
           </div>
         </div>
-
+        {/* 
         <div className="w-full">
           <h2 className="text-[#1a1a4d] text-4xl font-bold text-center mb-12">
             Our Services
           </h2>
           <ServicesMarquee services={services} />
-        </div>
+        </div> */}
 
         <div className="absolute inset-0 z-0 pointer-events-none">
           <motion.div
@@ -296,7 +291,7 @@ export default function App() {
               repeat: Infinity,
               ease: "linear",
             }}
-            className="absolute bottom-40 left-1/4"
+            className="absolute bottom-32 left-1/4"
           >
             <Heart className="text-[#ffb4b4] w-6 h-6" />
           </motion.div>
