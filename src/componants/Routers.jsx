@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import App from "../App";
 import Connect from "./Connect";
-import ChatbotUI from "./ChatbotUI ";
+
 import ChatMain from "./ChatMain";
 import Resorse from "./Resorse";
 import Therapy from "./Therapy";

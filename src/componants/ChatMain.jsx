@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Send, Loader2, Bot, User, Cross } from "lucide-react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const ChatMain = () => {
   const [messages, setMessages] = useState([
     {
@@ -21,22 +22,77 @@ const ChatMain = () => {
     scrollToBottom();
   }, [messages]);
 
+  const cleanAPIResponse = (response) => {
+    try {
+      const parsed =
+        typeof response === "string" ? JSON.parse(response) : response;
+
+      const responseText = parsed.response;
+
+      const outputIndex = responseText.indexOf("Output:");
+
+      if (outputIndex === -1) {
+        throw new Error("Output section not found in response");
+      }
+
+      let cleanedText = responseText.substring(outputIndex + "Output:".length);
+
+      cleanedText = cleanedText
+        .replace(/\\n/g, "\n")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+
+      return cleanedText;
+    } catch (error) {
+      console.error("Error cleaning API response:", error);
+      return "I apologize, but I had trouble processing the response. Could you try rephrasing your message?";
+    }
+  };
+
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
-    setMessages((prev) => [...prev, { type: "user", content: inputMessage }]);
+    const cleanedResponse = cleanAPIResponse(response.data);
+    setMessages((prev) => [
+      ...prev,
+      { type: "user", content: cleanedResponse },
+    ]);
     setInputMessage("");
     setIsLoading(true);
 
-    setTimeout(() => {
+    try {
+      const response = await axios.post(
+        "https://7bac-35-243-204-56.ngrok-free.app/diagnose",
+        {
+          patient_narrative: inputMessage,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       setMessages((prev) => [
         ...prev,
         {
           type: "bot",
-          content: `I understand how you're feeling. Would you like to talk more about it?`,
+          content: response.data,
         },
       ]);
+    } catch (error) {
+      console.error("Error:", error);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          type: "bot",
+          content:
+            "I apologize, but I'm having trouble processing your message right now. Could you try again?",
+        },
+      ]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (

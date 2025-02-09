@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Cloud, Star, Heart, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
-import ChatbotUI from "./componants/ChatbotUI ";
+
 import Login_Auth from "./componants/Login";
 
 const ElegantCard = ({ imageSrc }) => {
