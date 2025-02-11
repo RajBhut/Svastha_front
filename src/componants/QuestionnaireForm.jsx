@@ -37,8 +37,6 @@ const QuestionnaireForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(answers);
-    // Handle form submission
-    navigate("/confirmation");
   };
 
   return (
@@ -64,7 +62,10 @@ const QuestionnaireForm = () => {
                   className="w-full p-3 rounded-lg border border-purple-200 focus:outline-none focus:ring-2 focus:ring-[#66c7c7]"
                   rows="3"
                   onChange={(e) =>
-                    setAnswers({ ...answers, [q.id]: e.target.value })
+                    setAnswers({
+                      ...answers,
+                      [q.id]: e.target.value,
+                    })
                   }
                 />
               </div>

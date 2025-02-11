@@ -22,32 +22,6 @@ const ChatMain = () => {
     scrollToBottom();
   }, [messages]);
 
-  // const cleanAPIResponse = (response) => {
-  //   try {
-  //     const parsed =
-  //       typeof response === "string" ? JSON.parse(response) : response;
-
-  //     const responseText = parsed.response;
-
-  //     const outputIndex = responseText.indexOf("Output:");
-
-  //     if (outputIndex === -1) {
-  //       throw new Error("Output section not found in response");
-  //     }
-
-  //     let cleanedText = responseText.substring(outputIndex + "Output:".length);
-
-  //     cleanedText = cleanedText
-  //       .replace(/\\n/g, "\n")
-  //       .replace(/\n{3,}/g, "\n\n")
-  //       .trim();
-
-  //     return cleanedText;
-  //   } catch (error) {
-  //     console.error("Error cleaning API response:", error);
-  //     return "I apologize, but I had trouble processing the response. Could you try rephrasing your message?";
-  //   }
-  // };
   function cleanAPIResponse(response) {
     try {
       const parsed =
@@ -130,7 +104,7 @@ const ChatMain = () => {
 
             <button className="text-white  ml-auto hover:bg-white/20 rounded-full p-1">
               <Link to="/">
-                <Cross className=" rotate-45" size={18} />{" "}
+                <Cross className=" rotate-45" size={18} />
               </Link>
             </button>
           </div>

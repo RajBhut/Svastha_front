@@ -59,19 +59,6 @@ const ElegantCard = ({ imageSrc }) => {
   );
 };
 
-const Login = ({ onClose }) => {
-  return (
-    <div className="popup-overlay" onClick={onClose}>
-      <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-        <h2>Login</h2>
-        <input type="text" placeholder="Username" />
-        <input type="password" placeholder="Password" />
-        <button>Login</button>
-      </div>
-    </div>
-  );
-};
-
 const ServicesMarquee = ({ services }) => {
   return (
     <div className="relative w-full overflow-hidden py-12 bg-[#fff5e9]">
@@ -120,48 +107,8 @@ const ServicesMarquee = ({ services }) => {
   );
 };
 export default function App() {
-  const [open_chat, set_open_chat] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
   const [si, setSi] = useState(0);
   const sideImages = ["the.jpg", "the.jpg"];
-
-  const services = [
-    {
-      title: "Get Started & Our ABO",
-      icon: "😊",
-      bgColor: "bg-[#ffb4b4]",
-      buttonColor: "bg-[#89e0e0] text-white",
-      buttonText: "Get Started",
-    },
-    {
-      title: "Diagnosis & Chatbot",
-      icon: "😄",
-      bgColor: "bg-[#ffb4b4]",
-      buttonColor: "bg-[#ffcece] text-[#1a1a4d]",
-      buttonText: "Get Started",
-    },
-    {
-      title: "Chat with Chatbot",
-      icon: "🤖",
-      bgColor: "bg-[#89e0e0]",
-      buttonColor: "bg-[#89e0e0] text-white",
-      buttonText: "Get Started",
-    },
-    {
-      title: "Volunteering",
-      icon: "🤝",
-      bgColor: "bg-[#ffb4b4]",
-      buttonColor: "bg-[#ffcece] text-[#1a1a4d]",
-      buttonText: "Therapist",
-    },
-    {
-      title: "Volunteering Portal",
-      icon: "💝",
-      bgColor: "bg-[#89e0e0]",
-      buttonColor: "bg-[#b4e9e9] text-[#1a1a4d]",
-      buttonText: "Portal",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-[#e5c3b9] overflow-hidden">
@@ -196,13 +143,11 @@ export default function App() {
                 whileHover={{ scale: 1.05 }}
                 className="bg-[#66c7c7] text-white px-6 py-2 rounded-full hover:bg-[#55b6b6] transition-colors shadow-md"
               >
-                Chat
+                Svastha Sathi
               </motion.button>
             </Link>
 
-            <motion.button className="bg-[#ffb4b4] text-[#1a1a4d] px-4 py-2 rounded-full shadow-md transition-colors hover:bg-[#f5a6a6]">
-              <Login_Auth />
-            </motion.button>
+            <Login_Auth />
           </div>
         </div>
       </nav>
