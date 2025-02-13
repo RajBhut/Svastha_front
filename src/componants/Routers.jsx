@@ -10,6 +10,7 @@ import Therapy from "./Therapy";
 import QuestionnaireForm from "./QuestionnaireForm";
 import Enterprise from "./Enterprise";
 import NGOList from "./NGOList";
+import NgoDetailsPage from "./NgoDetailsPage";
 
 export default function Routers() {
   return (
@@ -26,6 +27,7 @@ export default function Routers() {
         />
         <Route path="/ent" element={<Enterprise />} />
         <Route path="/ngo" element={<NGOList />} />
+        <Route path="/ngo/:id" element={<NgoDetailsPage />} />
       </Routes>
     </BrowserRouter>
   );

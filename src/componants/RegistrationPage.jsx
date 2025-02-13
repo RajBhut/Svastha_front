@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const RegistrationPage = () => {
   const [activeTab, setActiveTab] = useState("volunteer");
   const navigate = useNavigate();
-
   const [volunteerData, setVolunteerData] = useState({
     name: "",
     email: "",
@@ -26,7 +25,6 @@ const RegistrationPage = () => {
     additionalInfo: "",
     proofOfStudent: null,
   });
-
   const [ngoData, setNgoData] = useState({
     orgName: "",
     regNumber: "",
@@ -43,11 +41,9 @@ const RegistrationPage = () => {
       phone: "",
     },
   });
-
   // const handleVolunteerSubmit = async (e) => {
   //   e.preventDefault();
   //   const formData = new FormData();
-
   //   formData.append("name", volunteerData.name);
   //   formData.append("email", volunteerData.email);
   //   formData.append("phone", volunteerData.phone);
@@ -57,12 +53,21 @@ const RegistrationPage = () => {
   //   formData.append("zip", volunteerData.zip);
   //   formData.append("availability", JSON.stringify(volunteerData.availability));
   //   formData.append("additionalInfo", volunteerData.additionalInfo);
-  //   formData.append("proofDocument", volunteerData.proofOfStudent);
-
+  //   const d = {
+  //     name: formData.get("name"),
+  //     email: formData.get("email"),
+  //     phone: formData.get("phone"),
+  //     address: formData.get("address"),
+  //     city: formData.get("city"),
+  //     state: formData.get("state"),
+  //     zip: formData.get("zip"),
+  //     availability: formData.get("availability"),
+  //     additionalInfo: formData.get("additionalInfo"),
+  //   };
   //   try {
   //     const response = await axios.post(
   //       "http://localhost:3000/api/volunteers",
-  //       formData,
+  //       d,
   //       {
   //         headers: {
   //           "Content-Type": "multipart/form-data",
@@ -75,7 +80,6 @@ const RegistrationPage = () => {
   //     console.error("Error submitting volunteer data:", error);
   //   }
   // };
-
   // const handleNgoSubmit = async (e) => {
   //   e.preventDefault();
   //   const formData = new FormData();
@@ -86,19 +90,24 @@ const RegistrationPage = () => {
   //   formData.append("address", ngoData.address);
   //   formData.append("website", ngoData.website);
   //   formData.append("foundingYear", ngoData.foundingYear);
-  //   formData.append("proofOfRegistration", ngoData.proofOfRegistration);
-  //   formData.append("contactPerson", JSON.stringify(ngoData.contactPerson));
 
+  //   formData.append("contactPerson", JSON.stringify(ngoData.contactPerson));
+  //   const d = {
+  //     orgName: formData.get("orgName"),
+  //     regNumber: formData.get("regNumber"),
+  //     email: formData.get("email"),
+  //     phone: formData.get("phone"),
+  //     address: formData.get("address"),
+  //     website: formData.get("website"),
+  //     foundingYear: formData.get("foundingYear"),
+  //     contactPerson: JSON.parse(formData.get("contactPerson")),
+  //   };
   //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:3000/api/ngos",
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
+  //     const response = await axios.post("http://localhost:3000/api/ngos", d, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
   //     console.log("NGO Data Submitted:", response.data);
   //     navigate("/");
   //   } catch (error) {
@@ -107,31 +116,25 @@ const RegistrationPage = () => {
   // };
   const handleVolunteerSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-
-    formData.append("name", volunteerData.name);
-    formData.append("email", volunteerData.email);
-    formData.append("phone", volunteerData.phone);
-    formData.append("address", volunteerData.address);
-    formData.append("city", volunteerData.city);
-    formData.append("state", volunteerData.state);
-    formData.append("zip", volunteerData.zip);
-    formData.append("availability", JSON.stringify(volunteerData.availability));
-    formData.append("additionalInfo", volunteerData.additionalInfo);
-    formData.append("proofDocument", volunteerData.proofOfStudent);
-
-    // Debugging: Log the FormData contents
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
+    const data = {
+      name: volunteerData.name,
+      email: volunteerData.email,
+      phone: volunteerData.phone,
+      address: volunteerData.address,
+      city: volunteerData.city,
+      state: volunteerData.state,
+      zip: volunteerData.zip,
+      availability: volunteerData.availability,
+      additionalInfo: volunteerData.additionalInfo,
+    };
 
     try {
       const response = await axios.post(
         "http://localhost:3000/api/volunteers",
-        formData,
+        data,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
@@ -144,28 +147,24 @@ const RegistrationPage = () => {
 
   const handleNgoSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("orgName", ngoData.orgName);
-    formData.append("regNumber", ngoData.regNumber);
-    formData.append("email", ngoData.email);
-    formData.append("phone", ngoData.phone);
-    formData.append("address", ngoData.address);
-    formData.append("website", ngoData.website);
-    formData.append("foundingYear", ngoData.foundingYear);
-    formData.append("proofOfRegistration", ngoData.proofOfRegistration);
-    formData.append("contactPerson", JSON.stringify(ngoData.contactPerson));
-
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
+    const data = {
+      orgName: ngoData.orgName,
+      regNumber: ngoData.regNumber,
+      email: ngoData.email,
+      phone: ngoData.phone,
+      address: ngoData.address,
+      website: ngoData.website,
+      foundingYear: ngoData.foundingYear,
+      contactPerson: ngoData.contactPerson,
+    };
 
     try {
       const response = await axios.post(
         "http://localhost:3000/api/ngos",
-        formData,
+        data,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
@@ -208,14 +207,12 @@ const RegistrationPage = () => {
             Home
           </Link>
         </div>
-
         <div className="bg-white/90 backdrop-blur-md rounded-lg shadow-lg p-8">
           {activeTab === "volunteer" ? (
             <form onSubmit={handleVolunteerSubmit} className="space-y-6">
               <h2 className="text-3xl font-thin text-purple-900 text-center mb-8">
                 Volunteer Registration
               </h2>
-
               <div className="space-y-4">
                 <h3 className="text-xl font-medium text-purple-900">
                   Personal Information
@@ -352,7 +349,6 @@ const RegistrationPage = () => {
                   </div>
                 </div>
               </div>
-
               <div className="space-y-4">
                 <h3 className="text-xl font-medium text-purple-900">
                   Availability
@@ -382,7 +378,6 @@ const RegistrationPage = () => {
                   ))}
                 </div>
               </div>
-
               <div className="space-y-4">
                 <h3 className="text-xl font-medium text-purple-900">
                   Additional Information
@@ -404,7 +399,6 @@ const RegistrationPage = () => {
                   />
                 </div>
               </div>
-
               {/* Submit Button */}
               <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -420,7 +414,6 @@ const RegistrationPage = () => {
               <h2 className="text-3xl font-thin text-purple-900 text-center mb-8">
                 NGO Registration
               </h2>
-
               <div className="space-y-4">
                 <h3 className="text-xl font-medium text-purple-900">
                   Organization Details
@@ -537,7 +530,6 @@ const RegistrationPage = () => {
                   </div>
                 </div>
               </div>
-
               <div className="space-y-4">
                 <h3 className="text-xl font-medium text-purple-900">
                   Contact Person
@@ -621,7 +613,6 @@ const RegistrationPage = () => {
                   </div>
                 </div>
               </div>
-
               {/* Submit Button */}
               <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -638,5 +629,4 @@ const RegistrationPage = () => {
     </div>
   );
 };
-
 export default RegistrationPage;

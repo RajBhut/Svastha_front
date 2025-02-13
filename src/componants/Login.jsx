@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { motion } from "framer-motion";
+import { LogIn, LogOut } from "lucide-react";
 
 const Login_Auth = () => {
   const { loginWithRedirect, logout, user, isAuthenticated, isLoading } =
@@ -57,21 +58,21 @@ const Login_Auth = () => {
 
           <motion.button
             onClick={() => logout({ returnTo: window.location.origin })}
-            className="bg-[#ffb4b4] text-[#1a1a4d] px-4 py-2 rounded-full shadow-md"
+            className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-2 rounded-full flex items-center space-x-2 shadow-lg"
             whileHover={{ scale: 1.05, backgroundColor: "#f5a6a6" }}
             whileTap={{ scale: 0.95 }}
           >
-            Log Out
+            <LogOut className="w-4 h-4 mr-2" /> Log Out
           </motion.button>
         </div>
       ) : (
         <motion.button
           onClick={() => loginWithRedirect()}
-          className="bg-[#ffb4b4] text-[#1a1a4d] px-4 py-2 rounded-full shadow-md"
+          className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-2 rounded-full flex items-center space-x-2 shadow-lg"
           whileHover={{ scale: 1.05, backgroundColor: "#f5a6a6" }}
           whileTap={{ scale: 0.95 }}
         >
-          Log In
+          <LogIn className="w-4 h-4 mr-2" /> Log In
         </motion.button>
       )}
     </div>
