@@ -605,6 +605,9 @@ function App() {
           </FadeInSection>
         </div>
       </section>
+      <elevenlabs-convai agent-id="LCdDDPiwOIl1pXUIZNyT">
+        sfsf
+      </elevenlabs-convai>
     </div>
   );
 }
