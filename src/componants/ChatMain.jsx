@@ -1,8 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Send, Loader2, Bot, User, Cross } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 const ChatMain = () => {
+  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
+  const CHAT_URL = import.meta.env.VITE_CHAT_API_URL;
   const [messages, setMessages] = useState([
     {
       type: "bot",
@@ -17,6 +21,19 @@ const ChatMain = () => {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+  const fetch_hist = async () => {
+    try {
+      const res = await axios.get(`http://localhost:3000/api/hist/${28}`);
+      console.log(res.data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetch_hist();
+    if (!isAuthenticated) {
+      // navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -53,12 +70,14 @@ const ChatMain = () => {
     if (!inputMessage.trim()) return;
 
     setMessages((prev) => [...prev, { type: "user", content: inputMessage }]);
+    const im = inputMessage;
+
     setInputMessage("");
     setIsLoading(true);
 
     try {
       const response = await axios.post(
-        "https://1da1-35-243-204-56.ngrok-free.app/diagnose",
+        `${CHAT_URL}`,
         {
           patient_narrative: inputMessage,
         },
@@ -69,6 +88,14 @@ const ChatMain = () => {
         }
       );
       const cleanedResponse = cleanAPIResponse(response.data);
+      await axios.post(`http://localhost:3000/api/hist/${28}`, {
+        type: "user",
+        msg: im,
+      });
+      await axios.post(`http://localhost:3000/api/hist/${28}`, {
+        type: "bot",
+        msg: cleanedResponse,
+      });
       setMessages((prev) => [
         ...prev,
         {
@@ -76,6 +103,7 @@ const ChatMain = () => {
           content: cleanedResponse,
         },
       ]);
+      const r = cleanedResponse;
     } catch (error) {
       console.error("Error:", error);
 

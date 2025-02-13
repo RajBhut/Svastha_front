@@ -19,7 +19,7 @@ const Login_Auth = () => {
       </motion.div>
     );
   }
-
+  console.log("auth", isAuthenticated);
   return (
     <div className="relative">
       {isAuthenticated ? (

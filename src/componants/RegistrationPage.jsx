@@ -44,9 +44,71 @@ const RegistrationPage = () => {
     },
   });
 
+  // const handleVolunteerSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+
+  //   formData.append("name", volunteerData.name);
+  //   formData.append("email", volunteerData.email);
+  //   formData.append("phone", volunteerData.phone);
+  //   formData.append("address", volunteerData.address);
+  //   formData.append("city", volunteerData.city);
+  //   formData.append("state", volunteerData.state);
+  //   formData.append("zip", volunteerData.zip);
+  //   formData.append("availability", JSON.stringify(volunteerData.availability));
+  //   formData.append("additionalInfo", volunteerData.additionalInfo);
+  //   formData.append("proofDocument", volunteerData.proofOfStudent);
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3000/api/volunteers",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  //     console.log("Volunteer Data Submitted:", response.data);
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.error("Error submitting volunteer data:", error);
+  //   }
+  // };
+
+  // const handleNgoSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append("orgName", ngoData.orgName);
+  //   formData.append("regNumber", ngoData.regNumber);
+  //   formData.append("email", ngoData.email);
+  //   formData.append("phone", ngoData.phone);
+  //   formData.append("address", ngoData.address);
+  //   formData.append("website", ngoData.website);
+  //   formData.append("foundingYear", ngoData.foundingYear);
+  //   formData.append("proofOfRegistration", ngoData.proofOfRegistration);
+  //   formData.append("contactPerson", JSON.stringify(ngoData.contactPerson));
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3000/api/ngos",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  //     console.log("NGO Data Submitted:", response.data);
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.error("Error submitting NGO data:", error);
+  //   }
+  // };
   const handleVolunteerSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+
     formData.append("name", volunteerData.name);
     formData.append("email", volunteerData.email);
     formData.append("phone", volunteerData.phone);
@@ -58,10 +120,11 @@ const RegistrationPage = () => {
     formData.append("additionalInfo", volunteerData.additionalInfo);
     formData.append("proofDocument", volunteerData.proofOfStudent);
 
+    // Debugging: Log the FormData contents
     for (let [key, value] of formData.entries()) {
       console.log(`${key}: ${value}`);
     }
-    console.log(formData.values());
+
     try {
       const response = await axios.post(
         "http://localhost:3000/api/volunteers",
@@ -92,6 +155,10 @@ const RegistrationPage = () => {
     formData.append("proofOfRegistration", ngoData.proofOfRegistration);
     formData.append("contactPerson", JSON.stringify(ngoData.contactPerson));
 
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:3000/api/ngos",
@@ -108,7 +175,6 @@ const RegistrationPage = () => {
       console.error("Error submitting NGO data:", error);
     }
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 to-purple-100 p-6">
       <div className="max-w-4xl mx-auto">

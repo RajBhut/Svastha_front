@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import App from "../App";
@@ -8,6 +8,8 @@ import ChatMain from "./ChatMain";
 import Resorse from "./Resorse";
 import Therapy from "./Therapy";
 import QuestionnaireForm from "./QuestionnaireForm";
+import Enterprise from "./Enterprise";
+import NGOList from "./NGOList";
 
 export default function Routers() {
   return (
@@ -22,6 +24,8 @@ export default function Routers() {
           path="/questionnaire/:therapyType"
           element={<QuestionnaireForm />}
         />
+        <Route path="/ent" element={<Enterprise />} />
+        <Route path="/ngo" element={<NGOList />} />
       </Routes>
     </BrowserRouter>
   );

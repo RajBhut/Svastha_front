@@ -1,12 +1,17 @@
 import "./App.css";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Cloud, Star, Heart, Bot } from "lucide-react";
+import { Cloud, Star, Heart, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import Login_Auth from "./componants/Login";
+import Footer from "./componants/Footer";
 
-const ElegantCard = ({ imageSrc }) => {
+const ElegantCard = ({
+  imageSrc = "the.jpg",
+  head = "Heading",
+  para = "Aditional info",
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -46,112 +51,156 @@ const ElegantCard = ({ imageSrc }) => {
           }}
         >
           <div className="h-full bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 flex flex-col items-center justify-center">
-            <h2 className="text-2xl font-bold text-purple-800 mb-4">
-              Join Our Community
-            </h2>
-            <p className="text-purple-600 text-center">
-              Aditional info hear!!!
-            </p>
+            <h2 className="text-2xl font-bold text-purple-800 mb-4">{head}</h2>
+            <p className="text-purple-600 text-center">{para}</p>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
-const ServicesMarquee = ({ services }) => {
-  return (
-    <div className="relative w-full overflow-hidden py-12 bg-[#fff5e9]">
-      <motion.div
-        className="flex space-x-8 whitespace-nowrap"
-        animate={{
-          x: ["0%", "-50%"],
-        }}
-        transition={{
-          x: {
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: 20,
-            ease: "linear",
-          },
-        }}
-      >
-        {[...services, ...services].map((service, index) => (
-          <motion.div
-            key={index}
-            className="flex flex-col items-center min-w-[200px]"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div
-              className={`w-24 h-24 rounded-full ${service.bgColor} flex items-center justify-center mb-4 text-3xl shadow-lg`}
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.8 }}
-            >
-              {service.icon}
-            </motion.div>
-            <h3 className="text-[#1a1a4d] text-center text-sm font-medium mb-2">
-              {service.title}
-            </h3>
-            <motion.button
-              className={`${service.buttonColor} text-sm px-6 py-2 rounded-full hover:opacity-90 transition-opacity shadow-md`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {service.buttonText}
-            </motion.button>
-          </motion.div>
-        ))}
-      </motion.div>
-    </div>
-  );
-};
+// const ServicesMarquee = ({ services }) => {
+//   return (
+//     <div className="relative w-full overflow-hidden py-12 bg-[#fff5e9]">
+//       <motion.div
+//         className="flex space-x-8 whitespace-nowrap"
+//         animate={{
+//           x: ["0%", "-50%"],
+//         }}
+//         transition={{
+//           x: {
+//             repeat: Infinity,
+//             repeatType: "loop",
+//             duration: 20,
+//             ease: "linear",
+//           },
+//         }}
+//       >
+//         {[...services, ...services].map((service, index) => (
+//           <motion.div
+//             key={index}
+//             className="flex flex-col items-center min-w-[200px]"
+//             whileHover={{ scale: 1.05 }}
+//             transition={{ duration: 0.3 }}
+//           >
+//             <motion.div
+//               className={`w-24 h-24 rounded-full ${service.bgColor} flex items-center justify-center mb-4 text-3xl shadow-lg`}
+//               whileHover={{ rotate: 360 }}
+//               transition={{ duration: 0.8 }}
+//             >
+//               {service.icon}
+//             </motion.div>
+//             <h3 className="text-[#1a1a4d] text-center text-sm font-medium mb-2">
+//               {service.title}
+//             </h3>
+//             <motion.button
+//               className={`${service.buttonColor} text-sm px-6 py-2 rounded-full hover:opacity-90 transition-opacity shadow-md`}
+//               whileHover={{ scale: 1.1 }}
+//               whileTap={{ scale: 0.95 }}
+//             >
+//               {service.buttonText}
+//             </motion.button>
+//           </motion.div>
+//         ))}
+//       </motion.div>
+//     </div>
+//   );
+// };
 export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [si, setSi] = useState(0);
   const sideImages = ["the.jpg", "the.jpg"];
 
   return (
     <div className="min-h-screen bg-[#e5c3b9] overflow-hidden">
       <nav className="relative z-10 p-6 bg-white/10 backdrop-blur-sm">
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-6">
+        <div className="container mx-auto">
+          <div className="flex items-center justify-between">
+            {/* Logo/Home Link */}
             <Link
               to="/"
               className="flex items-center gap-2 px-6 py-2 bg-white/80 text-[#1a1a4d] rounded-lg hover:bg-white transition-colors shadow-md"
             >
               Home
             </Link>
-          </div>
-          <div className="flex items-center space-x-4">
+
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              className="bg-[#fff5e9] text-[#2d1c3b] px-6 py-2 rounded-full hover:bg-[#ffe0c2] transition-colors shadow-md"
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
             >
-              <Link to="/res">Resources</Link>
+              {isMenuOpen ? (
+                <X className="w-6 h-6 text-[#1a1a4d]" />
+              ) : (
+                <Menu className="w-6 h-6 text-[#1a1a4d]" />
+              )}
             </motion.button>
-            <Link to={"/add "}>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 className="bg-[#fff5e9] text-[#2d1c3b] px-6 py-2 rounded-full hover:bg-[#ffe0c2] transition-colors shadow-md"
               >
-                Join
+                <Link to="/res">Resources</Link>
               </motion.button>
-            </Link>
+              <Link to="/add">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-[#fff5e9] text-[#2d1c3b] px-6 py-2 rounded-full hover:bg-[#ffe0c2] transition-colors shadow-md"
+                >
+                  Join
+                </motion.button>
+              </Link>
+              <Link to="/chat">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-[#66c7c7] text-white px-6 py-2 rounded-full hover:bg-[#55b6b6] transition-colors shadow-md"
+                >
+                  Svastha Sathi
+                </motion.button>
+              </Link>
+              <Login_Auth />
+            </div>
+          </div>
 
-            <Link to={"/chat"}>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="bg-[#66c7c7] text-white px-6 py-2 rounded-full hover:bg-[#55b6b6] transition-colors shadow-md"
+          {/* Mobile Navigation */}
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{
+              opacity: isMenuOpen ? 1 : 0,
+              height: isMenuOpen ? "auto" : 0,
+            }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden overflow-hidden"
+          >
+            <div className="flex flex-col space-y-4 pt-4">
+              <Link
+                to="/res"
+                className="bg-[#fff5e9] text-[#2d1c3b] px-6 py-2 rounded-full hover:bg-[#ffe0c2] transition-colors shadow-md text-center"
+              >
+                Resources
+              </Link>
+              <Link
+                to="/add"
+                className="bg-[#fff5e9] text-[#2d1c3b] px-6 py-2 rounded-full hover:bg-[#ffe0c2] transition-colors shadow-md text-center"
+              >
+                Join
+              </Link>
+              <Link
+                to="/chat"
+                className="bg-[#66c7c7] text-white px-6 py-2 rounded-full hover:bg-[#55b6b6] transition-colors shadow-md text-center"
               >
                 Svastha Sathi
-              </motion.button>
-            </Link>
-
-            <Login_Auth />
-          </div>
+              </Link>
+              <div className="flex justify-center">
+                <Login_Auth />
+              </div>
+            </div>
+          </motion.div>
         </div>
       </nav>
-
       <main className="relative">
         <div className="container pt-16 pb-32">
           <div className="flex items-center justify-between">
@@ -185,17 +234,14 @@ export default function App() {
             </div>
 
             <div className="w-1/2 flex justify-center items-center">
-              <ElegantCard imageSrc={sideImages[si]} />
+              <ElegantCard
+                head="Join Our comunity"
+                para="Aditional info hear!!!"
+                imageSrc={sideImages[si]}
+              />
             </div>
           </div>
         </div>
-        {/* 
-        <div className="w-full">
-          <h2 className="text-[#1a1a4d] text-4xl font-bold text-center mb-12">
-            Our Services
-          </h2>
-          <ServicesMarquee services={services} />
-        </div> */}
 
         <div className="absolute inset-0 z-0 pointer-events-none">
           <motion.div
@@ -242,6 +288,7 @@ export default function App() {
           </motion.div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

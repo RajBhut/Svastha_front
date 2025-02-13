@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const QuestionnaireForm = () => {
   const { therapyType } = useParams();
   const navigate = useNavigate();
   const [answers, setAnswers] = useState({});
-
+  const [is_static_over, setis_static_over] = useState(false);
+  const CHAT_URL = import.meta.env.VITE_CHAT_API_URL;
   const questions = {
     individual: [
       { id: 1, question: "What brings you to therapy today?" },
@@ -34,9 +36,34 @@ const QuestionnaireForm = () => {
     ],
   };
 
+  const handle_static_send = async () => {
+    try {
+      const res = await axios.post(`${CHAT_URL}/questions`, {
+        patient_narrative: "",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(answers);
+    const an = Object.values(answers);
+    if (an.length != questions[therapyType].length) {
+      return;
+    }
+    let data = "";
+    for (let x = 0; x < questions[therapyType].length; x++) {
+      data +=
+        "Question: " +
+        questions[therapyType][x].question +
+        " Answer: " +
+        an[x] +
+        "\n";
+    }
+
+    console.log(data);
+    setis_static_over(true);
   };
 
   return (
@@ -53,23 +80,24 @@ const QuestionnaireForm = () => {
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {questions[therapyType]?.map((q) => (
-              <div key={q.id} className="space-y-2">
-                <label className="block text-lg text-[#2d1c3b]">
-                  {q.question}
-                </label>
-                <textarea
-                  className="w-full p-3 rounded-lg border border-purple-200 focus:outline-none focus:ring-2 focus:ring-[#66c7c7]"
-                  rows="3"
-                  onChange={(e) =>
-                    setAnswers({
-                      ...answers,
-                      [q.id]: e.target.value,
-                    })
-                  }
-                />
-              </div>
-            ))}
+            {!is_static_over &&
+              questions[therapyType]?.map((q) => (
+                <div key={q.id} className="space-y-2">
+                  <label className="block text-lg text-[#2d1c3b]">
+                    {q.question}
+                  </label>
+                  <textarea
+                    className="w-full p-3 rounded-lg border border-purple-200 focus:outline-none focus:ring-2 focus:ring-[#66c7c7]"
+                    rows="3"
+                    onChange={(e) =>
+                      setAnswers({
+                        ...answers,
+                        [q.id]: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              ))}
 
             <motion.button
               type="submit"
