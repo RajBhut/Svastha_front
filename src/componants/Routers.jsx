@@ -11,6 +11,8 @@ import QuestionnaireForm from "./QuestionnaireForm";
 import Enterprise from "./Enterprise";
 import NGOList from "./NGOList";
 import NgoDetailsPage from "./NgoDetailsPage";
+import Res from "./Res";
+import TApp from "./TApp";
 
 export default function Routers() {
   return (
@@ -19,7 +21,7 @@ export default function Routers() {
         <Route path="/" element={<App />} />
         <Route path="/add" element={<Connect />} />
         <Route path="/chat" element={<ChatMain />} />
-        <Route path="/res" element={<Resorse />} />
+
         <Route path="/the" element={<Therapy />} />
         <Route
           path="/questionnaire/:therapyType"
@@ -28,6 +30,8 @@ export default function Routers() {
         <Route path="/ent" element={<Enterprise />} />
         <Route path="/ngo" element={<NGOList />} />
         <Route path="/ngo/:id" element={<NgoDetailsPage />} />
+        <Route path="/res" element={<Res />} />
+        <Route path="/match" element={<TApp />} />
       </Routes>
     </BrowserRouter>
   );

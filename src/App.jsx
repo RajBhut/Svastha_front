@@ -320,6 +320,7 @@ import {
   Shield,
   Brain,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const FadeInSection = ({ children }) => {
   const [ref, inView] = useInView({
@@ -342,10 +343,9 @@ const FadeInSection = ({ children }) => {
 function App() {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
-
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-white">
-      {/* Navbar */}
       <motion.nav style={{ opacity }} className="fixed w-full glass-nav z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -366,7 +366,7 @@ function App() {
                     spy={true}
                     smooth={true}
                     offset={-100}
-                    duration={800}
+                    duration={100}
                     className="text-gray-600 hover:text-blue-600 font-medium cursor-pointer capitalize transition-colors"
                   >
                     {item}
@@ -412,7 +412,6 @@ function App() {
         </FadeInSection>
       </section>
 
-      {/* Chatbot Section */}
       <section id="chatbot" className="py-20 section-gradient">
         <div className="container mx-auto px-4">
           <FadeInSection>
@@ -427,6 +426,9 @@ function App() {
           <div className="grid md:grid-cols-2 gap-8">
             <FadeInSection>
               <motion.div
+                onClick={() => {
+                  navigate("/chat");
+                }}
                 whileHover={{ y: -5 }}
                 className="glass-card p-8 rounded-2xl hover-card"
               >
@@ -511,6 +513,9 @@ function App() {
             <FadeInSection>
               <motion.div
                 whileHover={{ y: -5 }}
+                onClick={() => {
+                  navigate("/add");
+                }}
                 className="glass-card p-8 rounded-2xl hover-card"
               >
                 <Users className="w-12 h-12 text-blue-600 mb-6" />
@@ -544,6 +549,9 @@ function App() {
             <FadeInSection>
               <motion.div
                 whileHover={{ y: -5 }}
+                onClick={() => {
+                  navigate("/res");
+                }}
                 className="glass-card p-8 rounded-2xl hover-card"
               >
                 <BookOpen className="w-12 h-12 text-blue-600 mb-6" />
@@ -574,6 +582,9 @@ function App() {
           <FadeInSection>
             <motion.div
               whileHover={{ y: -5 }}
+              onClick={() => {
+                navigate("/match");
+              }}
               className="glass-card p-8 rounded-2xl max-w-3xl mx-auto hover-card"
             >
               <div className="flex flex-col items-center text-center">
