@@ -52,9 +52,8 @@ const therapists = [
 ];
 
 function TherapistResults({ answers }) {
-  const [selectedTherapist, setSelectedTherapist] = useState < any > null;
-  const [expandedTherapist, setExpandedTherapist] =
-    (useState < number) | (null > null);
+  const [selectedTherapist, setSelectedTherapist] = useState(null);
+  const [expandedTherapist, setExpandedTherapist] = useState(null);
 
   if (selectedTherapist) {
     return (
