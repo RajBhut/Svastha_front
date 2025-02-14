@@ -48,7 +48,6 @@ const therapists = [
       "Understanding Depression in Young Adults (2020)",
     ],
   },
-  // ... other therapists
 ];
 
 function TherapistResults({ answers }) {

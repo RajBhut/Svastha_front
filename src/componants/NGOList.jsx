@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Building2, Users, MapPin, Calendar } from "lucide-react";
-
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 const NGOList = () => {
   const [ngos, setNgos] = useState([]);
   const [selectedNgo, setSelectedNgo] = useState(null);
@@ -14,6 +15,7 @@ const NGOList = () => {
         const response = await fetch("http://localhost:3000/api/ngos");
         const data = await response.json();
         setNgos(data);
+        console.log(data);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching NGOs:", error);
@@ -97,52 +99,54 @@ const NGOList = () => {
           variants={container}
         >
           {ngos.map((ngo) => (
-            <div
-              key={ngo.id}
-              variants={item}
-              className="group"
-              whileHover={{ y: -8 }}
-            >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full transform transition-all duration-300 hover:shadow-xl">
-                <div className="p-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Building2 className="h-5 w-5 text-blue-500" />
-                    <h2 className="text-xl font-semibold text-gray-900">
-                      {ngo.orgName}
-                    </h2>
-                  </div>
-
-                  <div className="flex items-center gap-2 mb-4 text-sm text-gray-600">
-                    <MapPin className="h-4 w-4 text-gray-500" />
-                    <span>{ngo.location || "Global"}</span>
-                  </div>
-
-                  <p className="text-gray-600 mb-6">{ngo.description}</p>
-
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="flex items-center gap-2">
-                      <Users className="h-4 w-4 text-gray-500" />
-                      <span className="text-sm text-gray-600">
-                        {ngo.volunteerCount || "0"} volunteers
-                      </span>
+            <Link to={`/ngo/${ngo.id}`} key={ngo.id}>
+              <motion.div
+                key={ngo.id}
+                variants={item}
+                className="group"
+                whileHover={{ y: -8 }}
+              >
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full transform transition-all duration-300 hover:shadow-xl">
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Building2 className="h-5 w-5 text-blue-500" />
+                      <h2 className="text-xl font-semibold text-gray-900">
+                        {ngo.orgName}
+                      </h2>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-gray-500" />
-                      <span className="text-sm text-gray-600">
-                        Since {ngo.foundedYear || "2024"}
-                      </span>
-                    </div>
-                  </div>
 
-                  <button
+                    <div className="flex items-center gap-2 mb-4 text-sm text-gray-600">
+                      <MapPin className="h-4 w-4 text-gray-500" />
+                      <span>{ngo.location || "Global"}</span>
+                    </div>
+
+                    <p className="text-gray-600 mb-6">{ngo.description}</p>
+
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4 text-gray-500" />
+                        <span className="text-sm text-gray-600">
+                          {ngo.volunteerCount || "0"} volunteers
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-4 w-4 text-gray-500" />
+                        <span className="text-sm text-gray-600">
+                          Since {ngo.foundedYear || "2024"}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* <button
                     onClick={() => handleJoinNgo(ngo)}
                     className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transform transition-all duration-200 hover:scale-105 active:scale-95"
                   >
                     Join Organization
-                  </button>
+                  </button> */}
+                  </div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
 

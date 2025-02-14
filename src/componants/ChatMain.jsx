@@ -9,11 +9,8 @@ const ChatMain = () => {
   const navigate = useNavigate();
   const CHAT_URL = import.meta.env.VITE_CHAT_API_URL;
   const [sessionId] = useState(() => {
-    const existingId = localStorage.getItem("chatSessionId");
-    if (existingId) return existingId;
-
     const newId = uuidv4();
-    localStorage.setItem("chatSessionId", newId);
+
     return newId;
   });
   const [messages, setMessages] = useState([
@@ -79,10 +76,10 @@ const ChatMain = () => {
     const im = inputMessage;
     setInputMessage("");
     setIsLoading(true);
-
+    console.log(sessionId);
     try {
       const response = await axios.post(
-        `https://2085-35-226-51-201.ngrok-free.app/chat`,
+        `https://83f7-35-230-33-203.ngrok-free.app/chat`,
         {
           user_message: inputMessage,
           user_id: sessionId,

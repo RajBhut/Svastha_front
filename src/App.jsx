@@ -262,7 +262,6 @@ function App() {
         </div>
       </section>
 
-      {/* Resources Section */}
       <section id="resources" className="py-20">
         <div className="container mx-auto px-4">
           <FadeInSection>
@@ -334,6 +333,9 @@ function App() {
           </FadeInSection>
         </div>
       </section>
+      {
+        //ItDKPqxNM3RwT5HNqE4j
+      }
       <elevenlabs-convai agent-id="LCdDDPiwOIl1pXUIZNyT">
         Chat
       </elevenlabs-convai>
