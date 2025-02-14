@@ -132,6 +132,13 @@ function App() {
               >
                 Pationt History
               </NavLink>
+              <NavLink
+                key={16}
+                to={"/ngo"}
+                className="text-gray-600 hover:text-blue-600 font-medium cursor-pointer capitalize transition-colors"
+              >
+                Join NGO
+              </NavLink>
             </div>
 
             <Login_Auth />
