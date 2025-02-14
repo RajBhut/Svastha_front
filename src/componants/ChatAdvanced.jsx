@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { v4 as uuidv4 } from "uuid";
-const ChatMain = () => {
+const ChatAdvanced = () => {
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
   const CHAT_URL = import.meta.env.VITE_CHAT_API_URL;
@@ -19,8 +19,7 @@ const ChatMain = () => {
   const [messages, setMessages] = useState([
     {
       type: "bot",
-      content:
-        "Hello! I'm here to listen and support you. How are you feeling today?",
+      content: "Hello! describe your Health condition",
     },
   ]);
   const [inputMessage, setInputMessage] = useState("");
@@ -82,7 +81,7 @@ const ChatMain = () => {
 
     try {
       const response = await axios.post(
-        `https://2085-35-226-51-201.ngrok-free.app/chat`,
+        `https://2085-35-226-51-201.ngrok-free.app/diagnose/questions`,
         {
           user_message: inputMessage,
           user_id: sessionId,
@@ -214,4 +213,4 @@ const ChatMain = () => {
   );
 };
 
-export default ChatMain;
+export default ChatAdvanced;

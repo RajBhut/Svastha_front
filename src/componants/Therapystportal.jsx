@@ -15,6 +15,7 @@ import { PatientList } from "./PatientList";
 import { ChatHistory } from "./ChatHistory";
 import { PatientHistory } from "./PatientHistory";
 import { useNavigate } from "react-router-dom";
+import VideoCall from "./VideoCall";
 
 const mockPatients = [
   {
@@ -93,7 +94,7 @@ function Therapystportal() {
   const filteredPatients = mockPatients.filter((patient) =>
     patient.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  const [isInCall, setIsInCall] = useState(false);
   const sidebarItems = [
     { icon: Users, label: "Patients", action: () => {} },
     { icon: Calendar, label: "Schedule", action: () => {} },
@@ -147,6 +148,14 @@ function Therapystportal() {
                   <span>{item.label}</span>
                 </motion.button>
               ))}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsInCall(true)}
+                className="px-6 py-2 rounded-lg text-sm font-medium bg-green-500 text-white hover:bg-green-600"
+              >
+                Start Video Call
+              </motion.button>
             </nav>
           </motion.div>
         )}
@@ -252,6 +261,7 @@ function Therapystportal() {
           )}
         </div>
       </div>
+      {isInCall && <VideoCall onEndCall={() => setIsInCall(false)} />}
     </div>
   );
 }

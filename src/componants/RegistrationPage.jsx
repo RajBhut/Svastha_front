@@ -41,79 +41,7 @@ const RegistrationPage = () => {
       phone: "",
     },
   });
-  // const handleVolunteerSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("name", volunteerData.name);
-  //   formData.append("email", volunteerData.email);
-  //   formData.append("phone", volunteerData.phone);
-  //   formData.append("address", volunteerData.address);
-  //   formData.append("city", volunteerData.city);
-  //   formData.append("state", volunteerData.state);
-  //   formData.append("zip", volunteerData.zip);
-  //   formData.append("availability", JSON.stringify(volunteerData.availability));
-  //   formData.append("additionalInfo", volunteerData.additionalInfo);
-  //   const d = {
-  //     name: formData.get("name"),
-  //     email: formData.get("email"),
-  //     phone: formData.get("phone"),
-  //     address: formData.get("address"),
-  //     city: formData.get("city"),
-  //     state: formData.get("state"),
-  //     zip: formData.get("zip"),
-  //     availability: formData.get("availability"),
-  //     additionalInfo: formData.get("additionalInfo"),
-  //   };
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:3000/api/volunteers",
-  //       d,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
-  //     console.log("Volunteer Data Submitted:", response.data);
-  //     navigate("/");
-  //   } catch (error) {
-  //     console.error("Error submitting volunteer data:", error);
-  //   }
-  // };
-  // const handleNgoSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("orgName", ngoData.orgName);
-  //   formData.append("regNumber", ngoData.regNumber);
-  //   formData.append("email", ngoData.email);
-  //   formData.append("phone", ngoData.phone);
-  //   formData.append("address", ngoData.address);
-  //   formData.append("website", ngoData.website);
-  //   formData.append("foundingYear", ngoData.foundingYear);
 
-  //   formData.append("contactPerson", JSON.stringify(ngoData.contactPerson));
-  //   const d = {
-  //     orgName: formData.get("orgName"),
-  //     regNumber: formData.get("regNumber"),
-  //     email: formData.get("email"),
-  //     phone: formData.get("phone"),
-  //     address: formData.get("address"),
-  //     website: formData.get("website"),
-  //     foundingYear: formData.get("foundingYear"),
-  //     contactPerson: JSON.parse(formData.get("contactPerson")),
-  //   };
-  //   try {
-  //     const response = await axios.post("http://localhost:3000/api/ngos", d, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-  //     console.log("NGO Data Submitted:", response.data);
-  //     navigate("/");
-  //   } catch (error) {
-  //     console.error("Error submitting NGO data:", error);
-  //   }
-  // };
   const handleVolunteerSubmit = async (e) => {
     e.preventDefault();
     const data = {

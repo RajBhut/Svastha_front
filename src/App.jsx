@@ -107,7 +107,6 @@ function App() {
               animate={{ opacity: 1 }}
               className="flex items-center space-x-2"
             >
-              <Heart className="w-8 h-8 text-blue-600" />
               <span className="text-xl font-bold gradient-text">Svastha</span>
             </motion.div>
             <div className="hidden md:flex space-x-8">
@@ -226,6 +225,9 @@ function App() {
             <FadeInSection>
               <motion.div
                 whileHover={{ y: -5 }}
+                onClick={() => {
+                  navigate("/chat");
+                }}
                 className="glass-card p-8 rounded-2xl hover-card"
               >
                 <div className="flex items-center space-x-4 mb-6">
@@ -245,9 +247,6 @@ function App() {
                   exercises.
                 </p>
                 <div className="flex space-x-3">
-                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-blue-100 text-blue-600 font-medium">
-                    <Mic className="w-4 h-4 mr-2" /> Voice Enabled
-                  </span>
                   <span className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-blue-50 text-blue-600 font-medium">
                     <Sparkles className="w-4 h-4 mr-2" /> AI-Powered
                   </span>
