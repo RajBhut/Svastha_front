@@ -13,6 +13,7 @@ import NGOList from "./NGOList";
 import NgoDetailsPage from "./NgoDetailsPage";
 import Res from "./Res";
 import TApp from "./TApp";
+import Therapystportal from "./Therapystportal";
 
 export default function Routers() {
   return (
@@ -32,6 +33,7 @@ export default function Routers() {
         <Route path="/ngo/:id" element={<NgoDetailsPage />} />
         <Route path="/res" element={<Res />} />
         <Route path="/match" element={<TApp />} />
+        <Route path="/patiantHistory" element={<Therapystportal />} />
       </Routes>
     </BrowserRouter>
   );
