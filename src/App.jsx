@@ -191,44 +191,7 @@ function App() {
               mental well-being journey
             </p>
           </FadeInSection>
-          <div className="grid md:grid-cols-2 gap-8">
-            <FadeInSection>
-              <motion.div
-                onClick={() => {
-                  navigate("/chat");
-                }}
-                whileHover={{ y: -5 }}
-                className="glass-card p-8 rounded-2xl hover-card"
-              >
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="p-3 bg-blue-100 rounded-xl">
-                    <Bot className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-semibold">
-                      Diagnosis Assistant
-                    </h3>
-                    <p className="text-gray-500">
-                      AI-Powered Mental Health Assessment
-                    </p>
-                  </div>
-                </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  Take a comprehensive mental health assessment with our AI
-                  assistant. Get personalized insights and recommendations based
-                  on your responses.
-                </p>
-                <div className="flex space-x-3">
-                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-blue-100 text-blue-600 font-medium">
-                    <PlusCircle className="w-4 h-4 mr-2" /> New Assessment
-                  </span>
-                  <span className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-blue-50 text-blue-600 font-medium">
-                    <Shield className="w-4 h-4 mr-2" /> Private & Secure
-                  </span>
-                </div>
-              </motion.div>
-            </FadeInSection>
-
+          <div className="grid md:grid-cols-1 gap-8">
             <FadeInSection>
               <motion.div
                 whileHover={{ y: -5 }}
