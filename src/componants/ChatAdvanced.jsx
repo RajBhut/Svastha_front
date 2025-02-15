@@ -81,7 +81,7 @@ const ChatAdvanced = () => {
 
     try {
       const response = await axios.post(
-        `https://83f7-35-230-33-203.ngrok-free.app/diagnose/questions`,
+        `https://9892-35-196-55-140.ngrok-free.app/diagnose/questions`,
         {
           user_message: inputMessage,
           user_id: sessionId,

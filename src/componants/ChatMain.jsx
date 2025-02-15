@@ -8,11 +8,12 @@ const ChatMain = () => {
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
   const CHAT_URL = import.meta.env.VITE_CHAT_API_URL;
-  const [sessionId] = useState(() => {
+  const [sessionId, setSestionId] = useState(() => {
     const newId = uuidv4();
 
     return newId;
   });
+
   const [messages, setMessages] = useState([
     {
       type: "bot",
@@ -76,10 +77,10 @@ const ChatMain = () => {
     const im = inputMessage;
     setInputMessage("");
     setIsLoading(true);
-    console.log(sessionId);
+
     try {
       const response = await axios.post(
-        `https://83f7-35-230-33-203.ngrok-free.app/chat`,
+        `https://9892-35-196-55-140.ngrok-free.app/chat`,
         {
           user_message: inputMessage,
           user_id: sessionId,
@@ -121,6 +122,9 @@ const ChatMain = () => {
       setIsLoading(false);
     }
   };
+  useEffect(() => {
+    setSestionId(uuidv4());
+  }, [setInputMessage]);
 
   return (
     <div className="min-h-screen bg-slate-50">
